@@ -1,7 +1,8 @@
 // Test ID: IIDSAT
 
+import { useLoaderData } from 'react-router-dom';
 import { calcMinutesLeft, formatCurrency,  formatDate, } from './../../utils/helpers'
-
+import  {getOrder}  from '../../services/apiRestaurant'
 const order = {
   id: "ABCDEF",
   customer: "Jonas",
@@ -50,6 +51,9 @@ function Order() {
   } = order;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
+ const menuItem = useLoaderData()
+ 
+
   return (
     <div>
       <div>
@@ -79,4 +83,12 @@ function Order() {
   );
 }
 
+export async function getMenuItem({params}) {
+  
+  const menuItem = await getOrder(params.orderId);
+  return menuItem;
+ }
+ 
+
 export default Order;
+
