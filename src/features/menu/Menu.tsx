@@ -19,7 +19,7 @@ const menu = useLoaderData() as Menu[];
 
 
 
-  return <ul>
+  return <ul className='px-1'>
     {menu.map((pizza) => <MenuItem pizza={pizza} key={pizza.id}/>)}
   </ul>;
 }

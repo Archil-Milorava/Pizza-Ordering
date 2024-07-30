@@ -8,10 +8,10 @@ function AppLayout() {
   const isLoading = navigation.state === 'loading';
   
   return (
-    <div>
+    <div className="relative h-screen grid grid-rows-[auto_1fr_auto]">
       {isLoading && <Loading />}
       <Header />
-      <main>
+      <main className=" w-full h-full bg-stone-100 overflow-y-scroll">
         <Outlet />
       </main>
       <CartOverview />
