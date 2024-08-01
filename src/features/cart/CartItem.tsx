@@ -1,16 +1,17 @@
-import {formatCurrency} from './../../utils/helpers'
-import Button from '../../ui/Button'
-import { useDispatch } from 'react-redux';
-import {removeItem} from '../../features/cart/cartSlice'
+import { useDispatch, useSelector } from 'react-redux';
+import { increaseItemQuantity, decreaseItemQuantity } from '../../features/cart/cartSlice';
+import { formatCurrency } from './../../utils/helpers';
 
 
 function CartItem({ item }) {
   const { id, name, quantity, totalPrice } = item;
+  const itemId = useSelector((state) => state.cart.cart.find((item) => item.id === id))
+  const itemQuantityById = itemId.quantity
+  console.log(itemQuantityById);
+  
   const dispatch = useDispatch();
 
-  const handleRemoveItem = () => {
-    dispatch(removeItem(id))
-  }
+  
 
   return (
     <li className='py-3 sm:flex sm:items-center sm:justify-between'>
@@ -19,10 +20,15 @@ function CartItem({ item }) {
       </p>
       <div className='flex space-x-2 items-center justify-between'>
         <p className='text-sm font-bold'>{formatCurrency(totalPrice)}</p>
-        <Button onClick={handleRemoveItem} type="small">Delete</Button>
+        <button onClick={() => dispatch(decreaseItemQuantity(id))}>-</button>
+        <span>{itemQuantityById}</span>
+        <button onClick={() => dispatch(increaseItemQuantity(id))}>+</button>
       </div>
     </li>
   );
 }
 
 export default CartItem;
+
+
+//<Button onClick={handleRemoveItem} type="small">Delete</Button>
