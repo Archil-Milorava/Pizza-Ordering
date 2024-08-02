@@ -39,7 +39,7 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload,
       );
 
-      if (existingItem.quantity === 0)
+      if (existingItem.quantity === 1)
         cartSlice.caseReducers.removeItem(state, action);
 
       if (existingItem) {

@@ -5,6 +5,7 @@ import CartItem from "./CartItem";
 import { clearCart } from "./cartSlice";
 
 function Cart() {
+  
   const userName = useSelector((state) => state.user.userName);
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();

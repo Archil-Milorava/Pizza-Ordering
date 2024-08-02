@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { increaseItemQuantity, decreaseItemQuantity } from '../../features/cart/cartSlice';
 import { formatCurrency } from './../../utils/helpers';
+import Button from "../../ui/Button"
 
 
 function CartItem({ item }) {
   const { id, name, quantity, totalPrice } = item;
-  const itemId = useSelector((state) => state.cart.cart.find((item) => item.id === id))
-  const itemQuantityById = itemId.quantity
-  console.log(itemQuantityById);
+  const itemQuantityById = useSelector((state) => state.cart.cart.find((item) => item.id === id)?.quantity)
   
   const dispatch = useDispatch();
 
@@ -20,9 +19,9 @@ function CartItem({ item }) {
       </p>
       <div className='flex space-x-2 items-center justify-between'>
         <p className='text-sm font-bold'>{formatCurrency(totalPrice)}</p>
-        <button onClick={() => dispatch(decreaseItemQuantity(id))}>-</button>
+        <Button type='plusMinus' onClick={() => dispatch(decreaseItemQuantity(id))}>-</Button>
         <span>{itemQuantityById}</span>
-        <button onClick={() => dispatch(increaseItemQuantity(id))}>+</button>
+        <Button type="plusMinus" onClick={() => dispatch(increaseItemQuantity(id))}>+</Button>
       </div>
     </li>
   );

@@ -1,16 +1,16 @@
 import { formatCurrency } from "../../utils/helpers";
 import Button from "../../ui/Button";
-import { useDispatch } from "react-redux";
-import {addItem} from '../../features/cart/cartSlice'
+import { useDispatch, useSelector } from "react-redux";
+import { addItem,  increaseItemQuantity, decreaseItemQuantity } from "../../features/cart/cartSlice";
 
 type Cart = {
-  id: number,
-  name: string,
-  unitPrice: number,
-  ingredients: string[],
-  soldOut: boolean,
-  imageUrl: string
-}
+  id: number;
+  name: string;
+  unitPrice: number;
+  ingredients: string[];
+  soldOut: boolean;
+  imageUrl: string;
+};
 
 type MenuItemProps = {
   pizza: Cart;
@@ -18,6 +18,9 @@ type MenuItemProps = {
 
 function MenuItem({ pizza }: MenuItemProps) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+  const itemQuantityById = useSelector((state) => state.cart.cart.find((item) => item.id === id)?.quantity)
+  const cart = useSelector((state) => state.cart.cart);
+  const itemById = cart.find((item) => item.id === id);
 
   const dispatch = useDispatch();
 
@@ -27,12 +30,10 @@ function MenuItem({ pizza }: MenuItemProps) {
       name,
       unitPrice,
       quantity: 1,
-      totalPrice: unitPrice * 1
+      totalPrice: unitPrice * 1,
     };
 
     dispatch(addItem(newItem));
-    
-    
   };
 
   return (
@@ -47,7 +48,7 @@ function MenuItem({ pizza }: MenuItemProps) {
         <p className="text-sm capitalize italic text-stone-700">
           {ingredients.join(", ")}
         </p>
-        <div className="mt-auto flex items-center justify-between">
+        <div className="mt-auto flex items-center h-12 justify-between">
           {!soldOut ? (
             <p>{formatCurrency(unitPrice)}</p>
           ) : (
@@ -55,9 +56,29 @@ function MenuItem({ pizza }: MenuItemProps) {
               Sold out
             </p>
           )}
-          {!soldOut && <Button onClick={handleAddItem} type="small">
-            add to cart
-          </Button>}
+          {cart.includes(itemById) ? (
+            <div className="  w-auto flex gap-2 mr-2 items-center ">
+              <Button
+                type="plusMinus"
+                onClick={() => dispatch(decreaseItemQuantity(id))}
+              >
+                -
+              </Button>
+              <span>{itemQuantityById}</span>
+              <Button
+                type="plusMinus"
+                onClick={() => dispatch(increaseItemQuantity(id))}
+              >
+                +
+              </Button>
+            </div>
+          ) : (
+            !soldOut && (
+              <Button onClick={handleAddItem} type="small">
+                add to cart
+              </Button>
+            )
+          )}
         </div>
       </div>
     </li>
