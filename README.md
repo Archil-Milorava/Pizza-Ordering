@@ -7,7 +7,8 @@ In this application user is able to order a Pizza
 -react + TS
 -Tailwind
 -React Router
+-Rudeux Toolkit
 
 This application fetches Pizza items From an API with React Router
 
-# In case You can nor oerder Pizza and gettin ERROR, that means API can not get POST requests.
+# In case You can not order Pizza and gettin ERROR, that means API can not get POST requests.

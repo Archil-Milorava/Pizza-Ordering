@@ -29,8 +29,3 @@ export interface RootState {
     imageUrl: string;
   }
   
-export type CustomError = {
-  statusText?: string;
-  message?: string;
-  data?: any;
-};
