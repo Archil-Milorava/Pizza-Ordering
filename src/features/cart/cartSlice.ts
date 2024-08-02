@@ -27,6 +27,7 @@ const cartSlice = createSlice({
 
       if (existingItem) {
         existingItem.quantity++;
+        existingItem.totalPrice = existingItem.unitPrice * existingItem.quantity;
       }
     },
     decreaseItemQuantity(state, action) {

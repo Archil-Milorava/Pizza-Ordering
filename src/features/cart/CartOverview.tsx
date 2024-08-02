@@ -8,8 +8,9 @@ function CartOverview() {
     state.cart.cart.reduce((sum, curr) => sum + curr.quantity, 0),
   );
 
+
   const totalCartprice = useSelector((state: RootState) =>
-    state.cart.cart.reduce((sum, curr) => sum + curr.unitPrice, 0),
+    state.cart.cart.reduce((sum, curr) => (sum + curr.totalPrice), 0),
   );
 
   if (!totalCartQuantity) return null;
