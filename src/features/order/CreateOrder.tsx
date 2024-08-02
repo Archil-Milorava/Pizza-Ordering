@@ -1,9 +1,10 @@
 import { ActionFunctionArgs, Form, redirect, useNavigation } from "react-router-dom";
-import { createOrder } from "../../services/apiRestaurant";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { RootState } from "../../types/types";
 import Button from "../../ui/Button";
+//@ts-expect-error one js file
+import { createOrder } from "../../services/apiRestaurant";
 
 
 

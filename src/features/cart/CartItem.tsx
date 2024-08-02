@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { increaseItemQuantity, decreaseItemQuantity } from "./cartSlice";
-import { formatCurrency } from "./../../utils/helpers";
 import { CartItemType } from "../../types/types";
 import { RootState } from "../../types/types";
 import Button from "../../ui/Button";
@@ -23,7 +22,7 @@ function CartItem({ item }: CartItemProps) {
         {quantity}&times; {name}
       </p>
       <div className="flex items-center justify-between space-x-2">
-        <p className="text-sm font-bold">{formatCurrency(totalPrice)}</p>
+        <p className="text-sm font-bold">${totalPrice}</p>
         <Button
           type="plusMinus"
           onClick={() => dispatch(decreaseItemQuantity(id))}

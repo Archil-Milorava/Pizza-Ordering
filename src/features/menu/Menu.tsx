@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
-import {getMenu} from '../../services/apiRestaurant'
 import MenuItem from './MenuItem';
+//@ts-expect-error one js file
+import {getMenu} from '../../services/apiRestaurant'
 
 
 type Menu = {

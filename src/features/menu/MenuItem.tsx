@@ -1,4 +1,3 @@
-import { formatCurrency } from "../../utils/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addItem,
@@ -49,7 +48,7 @@ function MenuItem({ pizza }: MenuItemProps) {
         </p>
         <div className="mt-auto flex h-12 items-center justify-between">
           {!soldOut ? (
-            <p>{formatCurrency(unitPrice)}</p>
+            <p>${unitPrice}</p>
           ) : (
             <p className="text-sm font-medium uppercase text-stone-500">
               Sold out
