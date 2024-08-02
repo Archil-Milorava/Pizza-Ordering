@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Button from "../../ui/Button.js";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updareUsername } from "../../features/user/userSlice.js";
+import { updareUsername } from "./userSlice.js";
 
 function CreateUser() {
   const [username, setUsername] = useState("");

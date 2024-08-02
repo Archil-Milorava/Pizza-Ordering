@@ -1,6 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+export interface UserState {
+  userName: string;
+}
+
+
+const initialState: UserState = {
   userName: "",
 };
 
@@ -8,7 +13,7 @@ const userSlice = createSlice({
   name: "userSlice",
   initialState,
   reducers: {
-    updareUsername(state, action) {
+    updareUsername(state, action: PayloadAction<string>) {
       state.userName = action.payload;
     },
   },

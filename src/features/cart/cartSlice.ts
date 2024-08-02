@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { CartState } from "../../types/types";
 
 
 
 
-const initialState = {
+const initialState: CartState = {
   cart: [],
 };
 
