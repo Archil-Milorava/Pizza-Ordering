@@ -1,14 +1,9 @@
-import { Form, redirect, useNavigation } from "react-router-dom";
+import { ActionFunctionArgs, Form, redirect, useNavigation } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
-import Button from "../../ui/Button";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-
-// https://uibakery.io/regex-library/phone-number
-const isValidPhone = (str: string) =>
-  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str,
-  );
+import { RootState } from "../../types/types";
+import Button from "../../ui/Button";
 
 
 
@@ -16,8 +11,8 @@ function CreateOrder() {
   const [withPriority, setWithPriority] = useState(false)
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
-  const cart = useSelector((state) => state.cart.cart);
-  const userName = useSelector(state => state.user.userName)
+  const cart = useSelector((state: RootState) => state.cart.cart);
+  const userName = useSelector((state: RootState) => state.user.userName)
   
 
   return (
@@ -55,7 +50,7 @@ function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
-            value={withPriority}
+            value={withPriority.toString()}
             onChange={(e) => setWithPriority(e.target.checked)}
             />
           <label htmlFor="priority">Want to yo give your order priority?</label>
@@ -74,13 +69,13 @@ function CreateOrder() {
   );
 }
 
-export async function action({ request }) {
+export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   
   const order = {
     ...data,
-    cart: JSON.parse(data.cart),
+    cart: JSON.parse(data.cart as string),
     priority: data.priority === "on",
   };
 

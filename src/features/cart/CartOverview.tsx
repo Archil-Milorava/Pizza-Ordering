@@ -1,13 +1,14 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../../types/types";
 
 
 function CartOverview() {
-  const totalCartQuantity = useSelector((state) =>
+  const totalCartQuantity = useSelector((state: RootState) =>
     state.cart.cart.reduce((sum, curr) => sum + curr.quantity, 0),
   );
 
-  const totalCartprice = useSelector((state) =>
+  const totalCartprice = useSelector((state: RootState) =>
     state.cart.cart.reduce((sum, curr) => sum + curr.unitPrice, 0),
   );
 

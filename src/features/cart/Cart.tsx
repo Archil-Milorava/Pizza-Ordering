@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Button from "../../ui/Button";
 import CartItem from "./CartItem";
 import { clearCart } from "./cartSlice";
+import { RootState } from "../../types/types";
+import Button from "../../ui/Button";
 
 function Cart() {
   
-  const userName = useSelector((state) => state.user.userName);
-  const cart = useSelector((state) => state.cart.cart);
+  const userName = useSelector((state: RootState) => state.user.userName);
+  const cart = useSelector((state: RootState) => state.cart.cart);
   const dispatch = useDispatch();
 
   if (cart.length === 0)

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../ui/Button";
+import Button from "../../ui/Button.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updareUsername } from "../../features/user/userSlice.js";
@@ -9,11 +9,11 @@ function CreateUser() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function handleSubmit(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if(!username) return;
+    if (!username) return;
     dispatch(updareUsername(username));
-    navigate('/menu')
+    navigate("/menu");
   }
 
   return (
